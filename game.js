@@ -31,7 +31,7 @@ else if(p.mode==='build'){const frontier=-(owner.built*.65+.25);if(moveTo(p,{x:o
 else if(p.mode==='stairs'){
 let dx=(keys.ArrowRight||keys.d?1:0)-(keys.ArrowLeft||keys.a?1:0)+joystick.x,dy=(keys.ArrowDown||keys.s?1:0)-(keys.ArrowUp||keys.w?1:0)+joystick.y;
 const mag=Math.hypot(dx,dy),along=-dx*Math.sin(cameraYaw)+dy*Math.cos(cameraYaw);
-if(mag>.08){target=null;if(Math.abs(along)>.08){const old=p.y,frontier=-(owner.built*.65+.25);if(along<0&&p.y<=frontier+.025){if(owner.built>=stepsNeeded()){p.finished=true;finish(p.id);return}if(p.energy>.001){p.energy=Math.max(0,p.energy-9);owner.built++}}p.y=clamp(p.y+Math.sign(along)*Math.min(1,mag)*p.speed*dt,-(owner.built*.65+.25),1.3);if(p.y!==old)p.phase+=dt*12}}
+if(mag>.08){target=null;if(Math.abs(along)>.08){const old=p.y,frontier=-(owner.built*.65+.25);if(along<0&&p.y<=frontier+.025){if(owner.built>=stepsNeeded()){p.finished=true;finish(p.id);return}if(p.energy>.001){p.energy=Math.max(0,p.energy-9);owner.built++;playEffect('build',.65)}}p.y=clamp(p.y+Math.sign(along)*Math.min(1,mag)*p.speed*dt,-(owner.built*.65+.25),1.3);if(p.y!==old)p.phase+=dt*12}}
 else if(target){moveTo(p,{x:owner.lane,y:1.3},p.speed,dt)}
 p.x=owner.lane;if(p.y>=.55&&p.y>oldY){p.mode='gather';target=null;p.goal=null}
 }
